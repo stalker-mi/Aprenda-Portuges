@@ -10,7 +10,7 @@
 	import feathers.controls.Radio;
 	import feathers.core.ToggleGroup;
 	import feathers.controls.ToggleButton;
-	import feathers.themes.MetalWorksDesktopTheme;
+	import feathers.themes.MetalWorksMobileTheme;
 	
 	public class AddWorld extends Sprite {
 
@@ -18,7 +18,7 @@
 
 
 		public function AddWorld() {
-			new MetalWorksDesktopTheme();
+			new MetalWorksMobileTheme();
 			var label:TextField = new TextField(480, 60, "Выберите язык", "Verdana", 25, 0x00ff00, true);
 			label.x=int((EmbeddedAssets.STAGE_WIDTH - label.width) / 2);
             label.y = 5;
@@ -33,8 +33,9 @@
 			radio1.label = "One";
 			radio1.toggleGroup = group;
 			radio1.styleNameList.add( "custom-radio" );
-			radio1.scaleX = 3;
-			radio1.scaleY = 3;
+			radio1.
+			//radio1.scaleX = 3;
+			//radio1.scaleY=3;
 			addChild( radio1 );
 			 
 			var radio2:Radio = new Radio();
