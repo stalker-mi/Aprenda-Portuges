@@ -38,6 +38,8 @@
     <library-path append="true">
       <path-element>C:\Users\Admin\Desktop\Рабочий стол май 2014\vision3d test\pano v5\Aprenda-Portuges\FlashDev\AS3\libs\starling.swc</path-element>
       <path-element>C:\Users\Admin\Desktop\Рабочий стол май 2014\vision3d test\pano v5\Aprenda-Portuges\FlashDev\AS3\libs\feathers.swc</path-element>
+      <path-element>C:\Users\Admin\Desktop\Рабочий стол май 2014\vision3d test\pano v5\Aprenda-Portuges\FlashDev\AS3\libs\MetalWorksMobileTheme.swc</path-element>
+      <path-element>C:\Users\Admin\Desktop\Рабочий стол май 2014\vision3d test\pano v5\Aprenda-Portuges\FlashDev\AS3\libs\MetalWorksDesktopTheme.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
