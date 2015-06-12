@@ -16,7 +16,7 @@ package
 	 * ...
 	 * @author Vovik
 	 */
-	[SWF(width="480", height="320", frameRate="60", backgroundColor="#111111")]
+	[SWF(width="800", height="480", frameRate="60", backgroundColor="#111111")]
 	public class Main extends Sprite 
 	{
 		public static var STAGE : Stage;
