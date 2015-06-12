@@ -10,6 +10,7 @@
 	import feathers.core.ITextRenderer;
 	import feathers.data.ListCollection;
 	import feathers.data.LocalAutoCompleteSource;
+	import flash.text.engine.ElementFormat;
 	import flash.text.TextFormat;
 	import starling.display.Quad;
 	import starling.display.Sprite;
@@ -18,8 +19,6 @@
 	import starling.display.Image;
 	
 	import feathers.controls.Button;
-	import feathers.controls.TextInput;
-	
 	
 	public class Search extends Sprite {
 
@@ -62,65 +61,63 @@
 			*/
 			
 			var input:AutoComplete = new AutoComplete();
+			
 			input.promptFactory = function():ITextRenderer {
 				var messageRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
 				messageRenderer.textFormat = new TextFormat( "Segoe Print", 20, 0x333333 );
 				return messageRenderer;
 			}
-			
+			input.minimumAutoCompleteLength = 1;
+			input.textEditorProperties.fontFamily = "Segoe Print";
 			input.prompt = "Введите слово";
 			input.x = 255;
 			input.y = 100;
 			input.isEditable = true;
 			input.textEditorProperties.fontSize = 20;
-			input.textEditorProperties.fontFamily = "Segoe Print";
-			
+			input.backgroundEnabledSkin=new Image(Root.assets.getTexture("input10000"));
+			 input.backgroundFocusedSkin=new Image(Root.assets.getTexture("input10000"));
 			input.listFactory = function():List
 			{
 				 var popUpList:List = new List();
 				 var backgroundSkin:Quad = new Quad(88, 88, 0xdddddd);
 				 popUpList.backgroundSkin = backgroundSkin;
-				 
 				 popUpList.itemRendererFactory=function():IListItemRenderer
 				{
 					var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
 					renderer.labelFactory= function():ITextRenderer
 					 {
 						var messageRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
-						messageRenderer.textFormat = new TextFormat( "Segoe Print", 12, 0x333333 );
+						messageRenderer.textFormat = new TextFormat( "Segoe Print", 14, 0x333333 );
 						return messageRenderer;
 					 }
+					renderer.padding = 11;
 					return renderer;
 				};
 				
              return popUpList;
 			};
-			
-			input.source = new LocalAutoCompleteSource(new ListCollection(new <String>
-			[
-				"Apple",
-				"Apricot",
-				"Banana",
-				"Cantaloupe",
-				"Cherry",
-				"Grape",
-				"Lemon",
-				"Lime",
-				"Mango",
-				"Orange",
-				"Peach",
-				"Pineapple",
-				"Plum",
-				"Pomegranate",
-				"Raspberry",
-				"Strawberry",
-				"Watermelon"
-			]));
+			var source:Vector.<String> = new Vector.<String>;
+			source=Root.words.allWords.concat(Root.words.allTranslates);
+			input.source = new LocalAutoCompleteSource(new ListCollection(source));
+			input.addEventListener(Event.CLOSE, function(e:Event):void {
+				var t:Vector.<String>;
+				var myInput:AutoComplete = e.target as AutoComplete;
+				if (Root.words.searchWord(myInput.text).toString())
+					t = Root.words.searchWord(myInput.text);
+				else
+					t = Root.words.searchTranslate(myInput.text);
+				label_tr.visible = true;
+				label_tr.text = t.join();
+			});
 			addChild(input);
 			
+			var label_tr:TextField = new TextField(420, 64, "", "Segoe Print", 20);
+			label_tr.x=int((EmbeddedAssets.STAGE_WIDTH - label_tr.width) / 2);
+			label_tr.y = 200;
+			label_tr.visible = false;
+			addChild(label_tr);
 			
 		}
-		
 		
 		
 	}

@@ -31,7 +31,14 @@ package utils
 		}
 		
 		public function searchWord(translate:String):Vector.<String> {
-			return new Vector.<String>;
+			var words:Vector.<String> = new Vector.<String>;
+			
+			for (var i:int=0; i < this.words.length; i++)
+				{
+					if (translate == this.words[i].translate)
+					words.push(this.words[i].word);
+				}
+			return words;
 		}
 		
 		public function searchTranslate(word:String):Vector.<String> {
@@ -84,6 +91,8 @@ package utils
 				}
 			return data;
 		}
+		
+		
 		
 	}
 
