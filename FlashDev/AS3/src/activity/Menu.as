@@ -2,6 +2,7 @@
 {
 	import feathers.text.BitmapFontTextFormat;
     import starling.display.Button;
+	import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.Event;
     import starling.text.TextField;
@@ -94,6 +95,9 @@
 			});
             addChild(button4);
 			
+			
+			//var helper:Image = new Image(Root.assets.getTexture("helper0000"));
+			//addChild(helper);
 			
         }
         
