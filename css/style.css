@@ -1,0 +1,12 @@
+.md .list .mapping_game .list-button{
+    padding: 15px 16px;
+    line-height: normal;
+}
+
+.mapping_game .cur{
+	background-color: #2196f3;
+}
+
+.mapping_game > li{
+	transition: background-color 1s;
+}

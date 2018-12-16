@@ -1,0 +1,38 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
+      </div>
+      <div class="title">Mapeamentos</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block">
+		<input type="hidden" id="mapping_score" value="0" >
+		<div class="row">
+			<div class="col-50">
+				<div class="list">
+				  <ul class="mapping_game ul_1">
+					  {{#each words}}
+						<li data-word_2="{{this.word_2}}"><a class="item-link list-button">{{this.word_1}}</a></li>
+					  {{/each}}
+				  </ul>
+				</div>
+			</div>
+			<div class="col-50">
+				<div class="list">
+				  <ul class="mapping_game ul_2">
+					{{#each words}}
+						<li><a class="item-link list-button">{{this.word_2}}</a></li>
+					{{/each}}
+				  </ul>
+				</div>
+			</div>
+		</div>
+    </div>
+  </div>
+</div>
