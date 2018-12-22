@@ -20,7 +20,7 @@ var app = new Framework7({
         path: '/search/',
         id: 'search',
         // Fill this tab content with Ajax request:
-        templateUrl: './pages/main/search.html'
+        templateUrl: './pages/main/search.html',
       },
       // Third tab
       {
@@ -42,7 +42,7 @@ var app = new Framework7({
 			  },
 			  words: get_words
 			}
-	   }
+	   },
     },
     {
       path: '/about/',
@@ -88,8 +88,8 @@ function get_words(){
 $(document).on('submit', '#save_word_form', function (e) {
 	e.preventDefault();
 	var formData = app.form.convertToData('#save_word_form');
-	formData.word_1 = formData.word_1.trim();
-	formData.word_2 = formData.word_2.trim();
+	formData.word_1 = ucFirst(formData.word_1.trim());
+	formData.word_2 = ucFirst(formData.word_2.trim());
 	var words = get_words();
 	var same_word = false;
 	for(i in words){
@@ -217,3 +217,42 @@ $(document).on('click', '#sync', function () {
 	});
 	
 });
+
+
+function ucFirst(str) {
+  if (!str) return str;
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+
+$(document).on('tab:init', '.tab', function (e, page) {
+	if(page.id == "search"){
+		$('#search_button').removeClass('display-none');
+	}
+	else{
+		$('#search_button').addClass('display-none');
+	}
+});
+
+
+$(document).on('input', '.searchbar input', function (e) {
+    var query = e.target.value.trim().toLowerCase();
+    if (!query) {
+      $('.searchbar-found li').removeClass('hidden-by-searchbar');
+      return;
+    }
+    search(query);
+});
+  
+function search(query){
+	var words = get_words();
+	for(i in words){
+		if(words[i].word_1.toLowerCase().indexOf(query) !== -1 || words[i].word_2.toLowerCase().indexOf(query) !== -1){
+			
+		}
+		else{
+			console.log(words[i].word_1.toLowerCase());
+			$('.searchbar-found li[data-word_1="'+words[i].word_1.toLowerCase()+'"]').addClass('hidden-by-searchbar');
+		}
+	}
+}

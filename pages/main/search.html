@@ -1,14 +1,13 @@
+
 <div class="block">
-	<p><b>Search ontent</b></p>
-	<a href="/about/">About app</a>
-	
-	
+	<form class="searchbar">
+			  <div class="searchbar-inner"><div class="searchbar-input-wrap"><input placeholder="Search" type="search" value="" class=""><i class="searchbar-icon"></i><span class="input-clear-button"></span></div><span class="searchbar-disable-button">Cancel</span></div>
+		  </form>
 	<div class="list simple-list">
-	  <ul>
+	  <ul class="searchbar-found">
 		  {{#each words}}
-			<li>{{this.word_1}} - {{this.word_2}}</li>
+			<li data-word_1="{{this.word_1.toLowerCase()}}">{{this.word_1}} - {{this.word_2}}</li>
 		  {{/each}}
 	  </ul>
 	</div>
-	
 </div>
