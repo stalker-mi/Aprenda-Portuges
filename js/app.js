@@ -36,6 +36,10 @@ var app = new Framework7({
 				  var count = localStorage.getItem('localword_count');
 				  return count != null ? count : 0 ;
 			  },
+			  remoteword_count: function(){
+				  var count = localStorage.getItem('remoteword_count');
+				  return count != null ? count : 0 ;
+			  },
 			  words: get_words
 			}
 	   }
@@ -84,7 +88,23 @@ function get_words(){
 $(document).on('submit', '#save_word_form', function (e) {
 	e.preventDefault();
 	var formData = app.form.convertToData('#save_word_form');
+	formData.word_1 = formData.word_1.trim();
+	formData.word_2 = formData.word_2.trim();
 	var words = get_words();
+	var same_word = false;
+	for(i in words){
+		if(words[i].word_1.toLowerCase() == formData.word_1.toLowerCase() && words[i].word_2.toLowerCase() == formData.word_2.toLowerCase()){
+			same_word = true;
+			break;
+		}
+	}
+	if(same_word){
+		app.notification.create({
+		  text: 'Esta palavra já está no dicionário',
+		  closeOnClick: true
+		}).open();
+		return 0;
+	}
 	words.push(formData);
 	words.sort(function (a, b) {
 	  if (a.word_1 > b.word_1) {
@@ -167,9 +187,33 @@ $(document).on('click', '.mapping_game li', function () {
 
 $(document).on('click', '#sync', function () {
 	app.preloader.show();
-	  setTimeout(function () {
-			$('#remoteword_count').text($('#localword_count').text());
-			app.preloader.hide();
-	  }, 3000);
+	var words = get_words();
+	words = words.filter((e) => e.type == 'new');
+	app.request.post('http://das-kapital.ru/api/ap/sync.php', { words: words }, function (data) {
+		data = JSON.parse(data);
+		var count = data.length;
+		data.sort(function (a, b) {
+		  if (a.word_1 > b.word_1) {
+			return 1;
+		  }
+		  if (a.word_1 < b.word_1) {
+			return -1;
+		  }
+		  return 0;
+		});
+		localStorage.setItem('words', JSON.stringify(data));
+		$('#localword_count').text(count)
+		$('#remoteword_count').text(count);
+		localStorage.setItem('localword_count', count);
+		localStorage.setItem('remoteword_count', count);
+		app.preloader.hide();
+	},
+	function(){
+		app.preloader.hide();
+		app.notification.create({
+		  text: 'Error',
+		  closeOnClick: true
+		}).open();
+	});
 	
 });
