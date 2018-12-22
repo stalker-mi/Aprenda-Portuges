@@ -248,7 +248,7 @@ function search(query){
 	var words = get_words();
 	for(i in words){
 		if(words[i].word_1.toLowerCase().indexOf(query) !== -1 || words[i].word_2.toLowerCase().indexOf(query) !== -1){
-			
+			$('.searchbar-found li[data-word_1="'+words[i].word_1.toLowerCase()+'"]').removeClass('hidden-by-searchbar');
 		}
 		else{
 			console.log(words[i].word_1.toLowerCase());
@@ -256,3 +256,18 @@ function search(query){
 		}
 	}
 }
+
+$(document).on('click', '#edit_word', function () {
+	app.popover.close();
+	app.notification.create({
+	  text: 'Não está pronto',
+	  closeOnClick: true
+	}).open();
+});
+
+$(document).on('click', '#remove_word', function () {
+	app.popover.close();
+	app.dialog.confirm('Quer apagar palavra?', function () {
+		app.dialog.alert('Ótimo!');
+	});
+});

@@ -6,8 +6,20 @@
 	<div class="list simple-list">
 	  <ul class="searchbar-found">
 		  {{#each words}}
-			<li data-word_1="{{this.word_1.toLowerCase()}}">{{this.word_1}} - {{this.word_2}}</li>
+			<li data-word_1="{{this.word_1.toLowerCase()}}">{{this.word_1}} - {{this.word_2}} <a class="icon f7-icons popover-open" data-popover=".s_word_action">info_round</a></li>
 		  {{/each}}
 	  </ul>
 	</div>
+</div>
+
+
+<div class="popover s_word_action">
+    <div class="popover-inner">
+      <div class="list">
+        <ul>
+          <li><a class="list-button item-link" href="#" id="edit_word"><i class="icon f7-icons">edit</i> Editar</a></li>
+          <li><a class="list-button item-link" href="#" id="remove_word"><i class="icon f7-icons">trash</i> Remover</a></a></li>
+        </ul>
+      </div>
+    </div>
 </div>
